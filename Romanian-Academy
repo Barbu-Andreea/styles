@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" xmlns:xl="http://www.w3.org/1999/xlink" version="1.0">
+  <info>
+    <title>Romanian Academy Style</title>
+    <id>http://www.zotero.org/styles/romanian-academy</id>
+    <link href="http://www.zotero.org/styles/romanian-academy" rel="self"/>
+    <author>
+      <name>Andreea Barbu</name>
+      <email>anonima_xiv@yahoo.com</email>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="science"/>
+    <updated>2024-07-29T00:00:00+00:00</updated>
+  </info>
+
+  <!-- Locale definitions -->
+  <locale xml:lang="en">
+    <terms>
+      <term name="editortranslator" form="short">
+        <single>ed. &amp; trans.</single>
+        <multiple>eds. &amp; trans.</multiple>
+      </term>
+      <term name="translator" form="short">trans.</term>
+      <term name="interviewer" form="short">
+        <single>interviewer</single>
+        <multiple>interviewers</multiple>
+      </term>
+      <term name="collection-editor" form="short">
+        <single>series ed.</single>
+        <multiple>series eds.</multiple>
+      </term>
+      <term name="circa" form="short">ca.</term>
+      <term name="bc"> B.C.E.</term>
+      <term name="ad"> C.E.</term>
+    </terms>
+  </locale>
+
+  <locale xml:lang="es">
+    <terms>
+      <term name="from">de</term>
+    </terms>
+  </locale>
+
+  <locale xml:lang="de">
+    <terms>
+      <term name="et-al">et al.</term>
+    </terms>
+  </locale>
+
+  <locale xml:lang="da">
+    <terms>
+      <term name="et-al">et al.</term>
+    </terms>
+  </locale>
+
+  <locale xml:lang="nn">
+    <terms>
+      <term name="et-al">et al.</term>
+    </terms>
+  </locale>
+
+  <locale xml:lang="nl">
+    <terms>
+      <term name="et-al">et al.</term>
+    </terms>
+  </locale>
+
+  <locale xml:lang="nb">
+    <terms>
+      <term name="et-al">et al.</term>
+    </terms>
+  </locale>
+
+  <locale xml:lang="fr">
+    <terms>
+      <term name="editor" form="short">
+        <single>éd.</single>
+        <multiple>éds.</multiple>
+      </term>
+    </terms>
+  </locale>
+
+  <!-- Macro definitions -->
+  <macro name="author">
+    <choose>
+      <if variable="author">
+        <names variable="author">
+          <name and="symbol" initialize-with=". " delimiter=", "/>
+        </names>
+      </if>
+      <else>
+        <text variable="editor" font-style="italic"/>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="issued">
+    <date variable="issued" form="text">
+      <date-part name="year"/>
+      <date-part name="month" prefix=" "/>
+    </date>
+  </macro>
+
+  <macro name="no-author-title">
+    <choose>
+      <if variable="title">
+        <text variable="title" font-style="italic"/>
+      </if>
+      <else>
+        <text term="no title" form="short"/>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="title">
+    <choose>
+      <if type="report">
+        <text variable="title" font-style="italic"/>
+      </if>
+      <else>
+        <text variable="title"/>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="publisher">
+    <choose>
+      <if variable="publisher">
+        <text variable="publisher"/>
+      </if>
+    </choose>
+  </macro>
+
+  <macro name="url">
+    <choose>
+      <if variable="URL">
+        <text variable="URL" prefix="Available at: " suffix="."/>
+      </if>
+      <else>
+        <text term="no URL" form="short"/>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="citation-locator">
+    <group>
+      <choose>
+        <if locator="chapter">
+          <label variable="locator" text-case="capitalize-first"/>
+        </if>
+        <else>
+          <label variable="locator" form="short"/>
+        </else>
+      </choose>
+      <text variable="locator" prefix=" "/>
+    </group>
+  </macro>
+
+  <macro name="container-title">
+    <choose>
+      <if type="article article-journal article-magazine article-newspaper dataset" match="any">
+        <text variable="container-title" font-style="italic" text-case="title"/>
+      </if>
+      <else-if type="paper-conference speech" match="any">
+        <choose>
+          <if variable="collection-editor container-author editor" match="any">
+            <text variable="container-title" font-style="italic"/>
+          </if>
+          <else>
+            <text variable="container-title" font-style="italic" text-case="title"/>
+          </else>
+        </choose>
+      </else-if>
+      <else-if type="bill legal_case legislation post-weblog webpage" match="none">
+        <text variable="container-title" font-style="italic"/>
+      </else-if>
+    </choose>
+  </macro>
+
+  <!-- Citation and Bibliography Definitions -->
+  <citation et-al-min="3" et-al-use-first="1" et-al-subsequent-min="3" et-al-subsequent-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year" givenname-disambiguation-rule="primary-name">
+    <sort>
+      <key macro="citation-order"/>
+    </sort>
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=", ">
+        <text macro="author"/>
+        <text macro="issued"/>
+        <text macro="citation-locator"/>
+      </group>
+    </layout>
+  </citation>
+
+  <bibliography hanging-indent="true" et-al-min="8" et-al-use-first="6" et-al-use-last="true" entry-spacing="0" line-spacing="2">
+    <sort>
+      <key macro="citation-order"/>
+    </sort>
+    <layout>
+      <group delimiter=" ">
+        <group delimiter=". " suffix=".">
+          <text macro="author"/>
+          <text macro="issued"/>
+          <text macro="title"/>
+          <text macro="container-title"/>
+          <text macro="publisher"/>
+        </group>
+        <text macro="url"/>
+      </group>
+    </layout>
+  </bibliography>
+</style>
